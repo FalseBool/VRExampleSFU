@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 315805893771274328}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.0765, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_Children: []
   m_Father: {fileID: 315805895381555718}
@@ -128,9 +128,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 8
-  layerMask:
+  saberLayerMask:
     serializedVersion: 2
     m_Bits: 64
+  hitLayerMask:
+    serializedVersion: 2
+    m_Bits: 384
+  HitParticle: {fileID: 4879130243572298372, guid: 501bb799cb2f0fc4c9950c54ce5da9e1, type: 3}
 --- !u!136 &221903676817778009
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -144,7 +148,7 @@ CapsuleCollider:
   m_Radius: 0.03
   m_Height: 0.22
   m_Direction: 2
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Center: {x: 0, y: 0, z: -0.08}
 --- !u!54 &5096233778264943058
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -218,7 +222,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 766554979967545420}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.0765, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 315805895381555718}

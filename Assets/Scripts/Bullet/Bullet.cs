@@ -8,27 +8,49 @@ public class Bullet : MonoBehaviour
 
     private Vector3 direction;
 
-    public LayerMask layerMask;
+    public LayerMask saberLayerMask;
+
+    public LayerMask hitLayerMask;
 
     private bool reflected = false;
 
+    [SerializeField]
+    private GameObject HitParticle;
+
     private void Start()
     {
-        direction = Vector3.forward;
+        direction = transform.forward;
+        StartCoroutine(LifeTimeRoutine());
     }
 
     void Update()
     {
-        transform.Translate(Time.deltaTime * Speed * direction);
+        transform.position += Time.deltaTime * Speed * direction;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!reflected && layerMask == (layerMask | (1 << other.gameObject.layer)))
+        if (!reflected && saberLayerMask == (saberLayerMask | (1 << other.gameObject.layer)))
         {
             reflected = true;
-            
-            direction = -Vector3.Reflect(direction, other.gameObject.transform.up).normalized;
+
+            Vector3 newDirection = -Vector3.Reflect(direction, other.gameObject.transform.up).normalized;
+            direction = newDirection;
         }
+
+        if (hitLayerMask == (hitLayerMask | (1 << other.gameObject.layer)))
+        {
+            if (HitParticle != null)
+            {
+                Instantiate(HitParticle, transform.position, Quaternion.identity);
+            }
+            Destroy(gameObject);
+        }
+    }
+
+    private IEnumerator LifeTimeRoutine()
+    {
+        yield return new WaitForSeconds(2f);
+        Destroy(gameObject);
     }
 }
